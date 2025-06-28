@@ -1,0 +1,31 @@
+{
+    "name": "administrator/web-login",
+    "description": "Web Login",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ahmad Zani Syechkar",
+            "email": "ahmadzanisy@gmail.com"
+        }
+    ],
+    "scripts": {
+        "test": "phpunit"
+    },
+    "require": {
+        "php" : ">=8",
+        "twbs/bootstrap": "^5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Administrator\\Belajar\\PHP\\MVC\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Administrator\\Belajar\\PHP\\MVC\\": "test/"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+<?php require __DIR__ . '/../components/header.php'; ?>
+
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+  <div class="card shadow border-0 rounded-4 w-100" style="max-width: 480px;">
+    <div class="card-body p-4">
+
+      <?php if (isset($model['error'])): ?>
+        <div class="alert alert-danger text-center" role="alert">
+          <?= htmlspecialchars($model['error']) ?>
+        </div>
+      <?php endif; ?>
+
+      <h2 class="text-center fw-bold mb-4 text-primary">Daftar Akun</h2>
+
+      <form method="POST" action="<?= htmlspecialchars($model['form_action'] ?? '') ?>">
+        <?php require __DIR__ . '/input.php'; ?>
+        <button type="submit" class="btn btn-primary w-100 rounded-pill shadow-sm mt-3">
+          <i class="bi bi-person-plus-fill me-2"></i>Daftar
+        </button>
+      </form>
+
+      <div class="text-center mt-3 small text-muted">
+          <?= $model['alternate_text'] ?? '' ?> <a href="<?= $model['alternate_link'] ?? '' ?>" class="text-decoration-none">
+          <?= strpos($model['form_action'] ?? '', 'login') !== false ? 'Daftar di sini' : 'Masuk di sini' ?>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<?php require __DIR__ . '/../components/footer.php'; ?>
