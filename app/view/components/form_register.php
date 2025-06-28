@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
-  <div class="card shadow border-0 rounded-4 w-100" style="max-width: 480px;">
+  <div class="card border rounded-4 w-100" style="max-width: 480px;">
     <div class="card-body p-4">
 
       <?php if (isset($model['error'])): ?>
