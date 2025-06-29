@@ -12,7 +12,7 @@
 
       <h2 class="text-center fw-bold mb-4 text-primary">Masukan Akun</h2>
 
-      <form method="POST" action="<?= htmlspecialchars($model['form_action'] ?? '') ?>">
+      <form method="POST" action="/users/login">
         <div class="mb-3">
           <label for="id" class="form-label fw-semibold">User ID</label>
           <input type="text" class="form-control rounded-3" id="id" name="id"

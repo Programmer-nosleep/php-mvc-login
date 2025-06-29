@@ -24,7 +24,6 @@
         'title' => 'Register new User',
         'content' => '',
         'error' => '',
-        'form_action' => '/users/register',
         'alternate_link' => '/users/login',
         'alternate_button' => 'Daftar',
         'alternate_text' => 'Sudah punya akun? Masuk di sini'
@@ -45,13 +44,8 @@
         View::redirect('/users/login');
       } catch (\Exception $exception) {
         View::render('auth/Register', [
-          'title' => 'Register',
-          'form_action' => '/users/register',
-          'alternate_link' => '/users/login',
-          'alternate_text' => 'Sudah punya akun?',
+          'title' => 'Register', 
           'error' => $exception->getMessage(),
-          'id' => $req->id,
-          'name' => $req->name
         ]);
       }
     }
