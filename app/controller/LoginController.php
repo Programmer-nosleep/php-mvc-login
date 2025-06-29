@@ -2,6 +2,8 @@
   namespace Administrator\Belajar\PHP\MVC\Controller;
 
   use Administrator\Belajar\PHP\MVC\Database\Database;
+  use Administrator\Belajar\PHP\MVC\Exception\ValidationException;
+  use Administrator\Belajar\PHP\MVC\Model\UserLoginRequest;
   use Administrator\Belajar\PHP\MVC\Repository\UserRepository;
   use Administrator\Belajar\PHP\MVC\Router\View;
   use Administrator\Belajar\PHP\MVC\Service\UserService;
@@ -32,6 +34,19 @@
 
     public function postLogin()
     {
+      $req = new UserLoginRequest();
+      $req->id = $_POST['id'];
+      $req->password = $_POST['password'];
 
+      try {
+        //code...
+        $this->userService->login($req);
+        View::redirect('/');
+      } catch (ValidationException $exception) {
+        View::render('auth/Login', [
+          'title' => 'Login User',
+          'error' => $exception->getMessage()
+        ]);
+      }
     }
   }

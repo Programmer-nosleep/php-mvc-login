@@ -17,7 +17,7 @@
   Router::add('GET', '/dashboard', HomeController::class, 'dashboard', [AuthMiddleware::class]);
 
   Router::add('GET', '/users/login', LoginController::class, 'login', []);
-  Router::add('POST', '/users/login', LoginController::class, 'login', []);
+  Router::add('POST', '/users/login', LoginController::class, 'postLogin', []);
 
   Router::add('GET', '/users/register', UserController::class, 'register', []);
   Router::add('POST', '/users/register', UserController::class, 'postRegister', []);
