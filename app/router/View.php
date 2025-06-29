@@ -10,4 +10,14 @@ class View
     // Load layout wrapper
     require_once __DIR__ . '/../view/' . $view . '.php';
   }
+
+  public static function redirect(string $url) 
+  {
+    header("Location: $url");
+    /* exit(); */
+    if (!getenv("mode") != "test")
+    {
+      exit();
+    }
+  }
 }

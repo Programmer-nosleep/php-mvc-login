@@ -8,7 +8,9 @@
   use Administrator\Belajar\PHP\MVC\Controller\UserController;
   use Administrator\Belajar\PHP\MVC\middleware\AuthMiddleware;
 
-  \Administrator\Belajar\PHP\MVC\Database\Database::getConnection('production');
+  use Administrator\Belajar\PHP\MVC\Database\Database;
+
+  Database::getConnection('production');
 
   Router::add('GET', '/', HomeController::class, 'index');
   Router::add('GET', '/dashboard', HomeController::class, 'dashboard', [AuthMiddleware::class]);
