@@ -11,7 +11,6 @@
   {
     private UserService $userService;
  
-
     public function __construct()
     {
       $conn = Database::getConnection();
@@ -22,7 +21,7 @@
     public function register()
     {
       View::render('auth/Register', [
-        'title' => 'Register',
+        'title' => 'Register new User',
         'content' => '',
         'error' => '',
         'form_action' => '/users/register',
@@ -42,6 +41,7 @@
 
       try {
         $this->userService->register($req);
+        View::redirect('/users/login');
       } catch (\Exception $exception) {
         View::render('auth/Register', [
           'title' => 'Register',
@@ -54,4 +54,13 @@
         ]);
       }
     }
+
+    public function login()
+    {
+      View::render('auth/Login', [
+        'title' => 'Login'
+      ]);
+    }
+
+
   }

@@ -63,7 +63,7 @@ namespace Administrator\Belajar\PHP\MVC\Config {
       $this->expectOutputRegex("[name]");
       $this->expectOutputRegex("[password]");
       $this->expectOutputRegex("[Register new User]");
-      $this->expectOutputRegex("[id, name, password cannot blank.]");
+      $this->expectOutputRegex("[Id, Name, Password cannot blank.]");
     }
 
     public function testPostRegisterDuplicate()

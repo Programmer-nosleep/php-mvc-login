@@ -7,7 +7,10 @@ use Administrator\Belajar\PHP\MVC\Model\UserRegisterRequest;
 use Administrator\Belajar\PHP\MVC\Repository\UserRepository;
 use Administrator\Belajar\PHP\MVC\Service\UserService;
 use Administrator\Belajar\PHP\MVC\Exception\ValidationException;
+use Administrator\Belajar\PHP\MVC\Model\UserLoginRequest;
 use PHPUnit\Framework\TestCase;
+
+use function PHPUnit\Framework\assertTrue;
 
 class UserServiceTest extends TestCase
 {
@@ -67,5 +70,39 @@ class UserServiceTest extends TestCase
     $req->password = "12345";
 
     $this->userService->register($req);
+  }
+
+  public function testLoginNotFound()
+  {
+    $this->expectException(ValidationException::class);
+    $req = new UserLoginRequest();
+
+    $req->id = "zani";
+    $req->password = "12345";
+
+    $this->userService->login($req);
+  }
+
+  public function tetLoginWrongPassword()
+  {
+    $user = new User();
+    $user->id = "zani";
+    $user->name = "Zani";
+    $user->password = password_hash("zani", PASSWORD_BCRYPT);
+    
+    $this->expectException(ValidationException::class);
+
+    $req = new UserLoginRequest();
+    $req->id = "zani";
+    $req->password = "12345";
+
+    $res = $this->userService->login($req);
+    self::assertEquals($req->id, $res->user->id);
+    self::assertTrue(password_verify($req->password, $res->user->password));
+  }
+
+  public function testLoginSuccess()
+  {
+
   }
 }

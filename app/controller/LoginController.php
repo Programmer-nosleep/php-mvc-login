@@ -22,7 +22,15 @@
       View::render('auth/Login', [
         'title' => 'Login',
         'content' => '',
-        'error' => ''
+        'error' => '',
+        'form_action' => '/users/login',
+        'alternate_link' => '/users/register',
+        'alternate_text' => 'Belum punya akun? Masuk di sini'
       ]);
+    }
+
+    public function postLogin()
+    {
+
     }
   }

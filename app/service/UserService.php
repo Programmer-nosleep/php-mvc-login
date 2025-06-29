@@ -7,6 +7,8 @@
   use Administrator\Belajar\PHP\MVC\Model\UserRegisterResponse;
   use Administrator\Belajar\PHP\MVC\Repository\UserRepository;
   use Administrator\Belajar\PHP\MVC\Database\Database;
+  use Administrator\Belajar\PHP\MVC\Model\UserLoginRequest;
+  use Administrator\Belajar\PHP\MVC\Model\UserLoginResponse;
 
   class UserService
   {
@@ -48,6 +50,30 @@
     }
 
     private function validateUserRegistrationRequest(UserRegisterRequest $req)
+    {
+      if ($req->id == null || $req->name == null || $req->password == null || trim($req->id) == "" || trim($req->name) == "" || trim($req->password) == "")
+      {
+        throw new ValidationException("Id, Name, Password cannot blank.");
+      }
+    }
+
+    public function login(UserLoginRequest $req): UserLoginResponse
+    {
+      $this->validateUserLoginRequest($req);
+
+      $user = $this->userRepository->findById($req->id);
+      
+      if ($user == null || !password_verify($req->password, $user->password)) {
+        throw new ValidationException("Id or password is wrong");
+      }
+
+      $res = new UserLoginResponse();
+      $res->user = $user;
+
+      return $res;
+    }
+
+    public function validateUserLoginRequest(UserLoginRequest $req)
     {
       if ($req->id == null || $req->name == null || $req->password == null || trim($req->id) == "" || trim($req->name) == "" || trim($req->password) == "")
       {
