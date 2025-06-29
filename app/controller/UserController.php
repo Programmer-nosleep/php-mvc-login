@@ -55,13 +55,4 @@
         ]);
       }
     }
-
-    public function login()
-    {
-      View::render('auth/Login', [
-        'title' => 'Login'
-      ]);
-    }
-
-
   }

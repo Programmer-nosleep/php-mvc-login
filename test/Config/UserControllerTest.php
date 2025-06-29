@@ -10,22 +10,25 @@ namespace Administrator\Belajar\PHP\MVC\Config {
   use PHPUnit\Framework\TestCase;
   use Administrator\Belajar\PHP\MVC\Database\Database;
   use Administrator\Belajar\PHP\MVC\Domain\User;
+  use Administrator\Belajar\PHP\MVC\Controller\LoginController;
   use Administrator\Belajar\PHP\MVC\Controller\UserController;
   use Administrator\Belajar\PHP\MVC\Repository\UserRepository;
 
   class UserControllerTest extends TestCase
   {
     private UserController $userController;
+    private LoginController $loginController;
     private UserRepository $userRepository;
 
     protected function setUp(): void
     {
       $this->userController = new UserController();
+      $this->loginController = new LoginController();
+      $this->userRepository = new UserRepository(Database::getConnection());
 
-      $userRepository = new UserRepository(Database::getConnection());
-      $userRepository->deleteAll();
-
+      $this->userRepository->deleteAll();
       putenv("mode=test");
+      $_SERVER['REQUEST_METHOD'] = 'POST';
     }
 
     public function testRegister()
@@ -91,7 +94,7 @@ namespace Administrator\Belajar\PHP\MVC\Config {
 
     public function testLogin()
     {
-      $this->userController->login();
+      $this->loginController->login();
 
       $this->expectOutputRegex("[Login user]");
       $this->expectOutputRegex("[Id]");
@@ -100,12 +103,31 @@ namespace Administrator\Belajar\PHP\MVC\Config {
 
     public function testLoginSuccess()
     {
-
+      $user = new User();
+      $user->id = 'zani';
+      $user->name = 'Zani';
+      $user->password = password_hash('12345', PASSWORD_BCRYPT);
+      $this->userRepository->insert($user);
+    
+      $_POST['id'] = 'zani';
+      $_POST['password'] = '12345';
+    
+      $this->loginController->postLogin();
+    
+      $this->expectOutputString("Location: /dashboard");
     }
-
+    
     public function testLoginValidationError()
     {
-
+      $_POST['id'] = '';
+      $_POST['password'] = '';
+    
+      $this->loginController->postLogin();
+    
+      $this->expectOutputRegex("[Login user]");
+      $this->expectOutputRegex("[Id]");
+      $this->expectOutputRegex("[Password]");
+      $this->expectOutputRegex("[Id and Password cannot blank.]");
     }
   }
 }

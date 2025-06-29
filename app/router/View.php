@@ -15,7 +15,7 @@ class View
   {
     header("Location: $url");
     /* exit(); */
-    if (!getenv("mode") != "test")
+    if (getenv("mode") !== "test")
     {
       exit();
     }

@@ -2,7 +2,7 @@
   <div class="card border rounded-4 w-100" style="max-width: 480px;">
     <div class="card-body p-4">
 
-      <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($model['error'])): ?>
+      <?php if (!empty($model['error'])): ?>
         <div class="row">
           <div class="alert alert-danger text-center" role="alert">
             <?= htmlspecialchars($model['error']) ?>
