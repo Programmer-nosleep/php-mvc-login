@@ -2,7 +2,7 @@
   <div class="card border rounded-4 w-100" style="max-width: 480px;">
     <div class="card-body p-4">
 
-      <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($model['error'])): ?>
+      <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($model['error'])): ?>
         <div class="row">
           <div class="alert alert-danger text-center" role="alert">
             <?= htmlspecialchars($model['error']) ?>
@@ -20,10 +20,10 @@
         </div>
         <div class="mb-3">
           <label for="password" class="form-label fw-semibold">Kata Sandi</label>
-          <input type="password" class="form-control rounded-3" id="password" name="password" required>
+          <input type="password" class="form-control rounded-3" id="password" name="password" value="<?php  // htmlspecialchars($_POST['password']) ?? '' ?>" required>
         </div>
         <button type="submit" class="btn btn-primary w-100 rounded-pill shadow-sm mt-3">
-          <i class="bi bi-person-plus-fill me-2"></i><?= $model['alternate_button'] ?>
+          <i class="bi bi-person-plus-fill me-2"></i><?= $model['alternate_button'] ?? 'Login' ?>
         </button>
       </form>
 

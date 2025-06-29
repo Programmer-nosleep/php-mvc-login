@@ -88,6 +88,25 @@ namespace Administrator\Belajar\PHP\MVC\Config {
       $this->expectOutputRegex("[Register new User]");
       $this->expectOutputRegex("[User id already exists.]");
     }
+
+    public function testLogin()
+    {
+      $this->userController->login();
+
+      $this->expectOutputRegex("[Login user]");
+      $this->expectOutputRegex("[Id]");
+      $this->expectOutputRegex("[Password]");
+    }
+
+    public function testLoginSuccess()
+    {
+
+    }
+
+    public function testLoginValidationError()
+    {
+
+    }
   }
 }
 
