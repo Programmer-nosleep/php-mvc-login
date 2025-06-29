@@ -26,6 +26,7 @@
         'error' => '',
         'form_action' => '/users/register',
         'alternate_link' => '/users/login',
+        'alternate_button' => 'Daftar',
         'alternate_text' => 'Sudah punya akun? Masuk di sini'
       ]);
     }
